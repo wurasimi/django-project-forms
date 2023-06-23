@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="">
+    <style>
+        :root {
+            font-size: 100%;
+            font-size: 16px;
+            line-height: 1.5;
+            --primary-blue: #3ded97;
+        }
+
+        body {
+            padding: 0;
+            margin: 0;
+            font-family: 'montserrat', sans-serif;
+            font-weight: 500;
+        }
+
+        h1 {
+            font-size: 2.25rem;
+            font-weight: 700;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #3ded97;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--primary-blue);
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .small {
+            font-size: 80%;
+            text-align: center;
+        }
+
+        .split-screen {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .left {
+            height: 200px;
+        }
+
+        .left,
+        .right {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .left {
+            background: linear-gradient(rgba(0,0,0,0), rgba(0, 0, 0, 0.5)), url(https://images.pexels.com/photos/4386158/pexels-photo-4386158.jpeg?auto=compress&cs=tinysrgb&w=600);
+            background-size: cover;
+        }
+
+        .left .copy {
+            color: white;
+            text-align: center;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale
+        }
+
+        .left p {
+            font-weight: 400;
+        }
+
+        .right .copy {
+            color: black;
+            text-align: center;
+        }
+
+        .right .copy p {
+            margin: 1.5em 0;
+            font-size: 0.875rem;
+        }
+
+        .right form {
+            width: 328px;
+        }
+
+        form input[type="text"],
+        form input[type="email"],
+        form input[type="password"] {
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+            border-radius: 8px;
+            border: 1px solid #c4c4c4;
+            padding: 1em;
+            margin-bottom: 0.875rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.75rem;
+        }
+
+        .input-container.password {
+            position: relative;
+        }
+
+        .checkbox-container {
+            display: block;
+            position: relative;
+            padding-left: 2rem;
+            cursor: pointer;
+            margin: 0 0 1.25rem 0;
+        }
+
+        .signup-btn {
+            display: block;
+            width: 100%;
+            background: var(--primary-blue);
+            color: white;
+            font-weight: 700;
+            border: none;
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .signup-btn:hover {
+            background: #3ded97;
+            cursor: pointer;
+        }
+
+        @media screen and (min-width: 900px) {
+            .split-screen {
+                flex-direction: row;
+                height: 100vh;
+            }
+
+            .left,
+            .right {
+                display: flex;
+                width: 50%;
+                height: auto;
+            }
+        }
+    </style>
+    <title>Document</title>
+</head>
+<body>
+    <div class="split-screen">
+        <div class="left">
+            <section class="copy">
+                <h1><span style="color: #3ded97;">EXPLORE </span>the journey</h1>
+                <p>Travel Over 160 countries via <span style="color: #3ded97;">DAVEZI </span> group</p>
+            </section>
+        </div>
+
+        <div class="right">
+            {% if submitted %}
+            <section class="copy">
+                <h2>Thank you! We will get back to you.</h2>
+            </section>
+            {% else %}
+            <form method="POST">
+                {% csrf_token %}
+                <section class="copy">
+                    <h2>REGISTER</h2>
+                </section>
+                <div class="input-container name">
+                    <label for="id_full_name">Full Name</label>
+                    {{ form.full_name }}
+                </div>
+                <div class="input-container matric-number">
+                    <label for="id_matric_number">Matric Number</label>
+                    {{ form.matric_number }}
+                </div>
+                <div class="input-container department">
+                    <label for="id_department">Department</label>
+                    {{ form.department }}
+                </div>
+                <div class="input-container email">
+                    <label for="id_email">Email</label>
+                    {{ form.email }}
+                </div>
+                <button class="signup-btn" type="submit">Submit</button>
+            </form>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
